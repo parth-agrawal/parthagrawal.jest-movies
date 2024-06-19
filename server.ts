@@ -1,18 +1,34 @@
 import express from 'express';
 import { MovieService } from './MovieService';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+
 
 
 
 const app = express();
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
+
+
 
 app.get('/', (req, res) => {
     res.send('hello world')
 })
 
-app.get('/allmovies', async (req, res) => {
+// is this correct?
+app.get('/movies/all', async (req, res) => {
 
     res.send(await MovieService().getAllMovies())
 })
+
+app.get('/movies/:id', async (req, res) => {
+    const id = req.params.id
+    res.send(await MovieService().getMovie(parseInt(id)))
+})
+
+
 
 
 

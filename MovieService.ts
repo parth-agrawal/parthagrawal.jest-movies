@@ -11,9 +11,15 @@ export const MovieService = () => {
             return allMovies
 
         },
-        // getMovie: (movieId: number) => {
+        getMovie: async (movieId: number) => {
+            const movie = await prisma.movie.findFirst({
+                where: {
+                    id: movieId
+                }
+            })
+            return movie
 
-        // }
+        }
 
     }
 }
