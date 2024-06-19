@@ -1,8 +1,7 @@
-import { PrismaClient } from '@prisma/client'
 import { Movie } from '@prisma/client'
 import { User } from '@prisma/client'
+import { prisma } from './prisma/prismaclient'
 
-const prisma = new PrismaClient()
 
 
 await prisma.user.create({

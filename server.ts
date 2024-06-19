@@ -1,4 +1,5 @@
 import express from 'express';
+import { MovieService } from './MovieService';
 
 
 
@@ -8,8 +9,9 @@ app.get('/', (req, res) => {
     res.send('hello world')
 })
 
-app.get('/allmovies', (req, res) => {
+app.get('/allmovies', async (req, res) => {
 
+    res.send(await MovieService().getAllMovies())
 })
 
 
