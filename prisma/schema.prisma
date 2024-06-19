@@ -14,7 +14,15 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id        Int     @id @default(autoincrement())
+  name      String
+  favorites Movie[]
+}
+
+model Movie {
+  id          Int    @id @default(autoincrement())
+  title       String
+  releaseYear Int
+  summary     String
+  favoritedBy User[]
 }
