@@ -14,15 +14,24 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  name      String
-  favorites Movie[]
+  id     Int             @id @default(autoincrement())
+  name   String
+  movies MoviesOnUsers[]
 }
 
 model Movie {
-  id          Int    @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   title       String
   releaseYear Int
   summary     String
-  favoritedBy User[]
+  users       MoviesOnUsers[]
+}
+
+model MoviesOnUsers {
+  movie   Movie @relation(fields: [movieId], references: [id])
+  movieId Int
+  user    User  @relation(fields: [userId], references: [id])
+  userId  Int
+
+  @@id([movieId, userId])
 }

@@ -28,7 +28,13 @@ app.get('/movies/:id', async (req, res) => {
     res.send(await MovieService().getMovie(parseInt(id)))
 })
 
+app.post('/users/:id/add'), async (req, res) => {
+    const userId = req.params.id
+    const movieId = req.body.movieId
 
+    await MovieService().favoriteMovie(userId, movieId)
+
+}
 
 
 
