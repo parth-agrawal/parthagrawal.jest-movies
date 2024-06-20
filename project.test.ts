@@ -62,6 +62,21 @@ describe('database tests', () => {
 
     })
 
+    it('should add a movie to favorites', async () => {
+        const newFavorite = await MovieService().favoriteMovie(2, 1)
+        const currentUser = await MovieService().getUser(2)
+        if (currentUser) {
+            expect(currentUser.movies).toEqual([
+                {
+                    "userId": 2,
+                    "movieId": 1,
+                },
+            ])
+        }
+
+    })
+
+
 
 
 
