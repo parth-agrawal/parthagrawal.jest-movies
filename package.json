@@ -7,7 +7,7 @@
     "loadenv": "npx dotenv-cli -e .env.test",
     "test:dockup": "docker compose -f docker-compose.test.yml up -d",
     "test:migrate": "npx prisma migrate dev",
-    "test:run": "bun vitest",
+    "test:run": "vitest run",
     "test:dockdown": "docker compose -f docker-compose.test.yml down",
     "test": "npx dotenv-cli -e .env.test -- npm run test:dockup && npx dotenv-cli -e .env.test -- npm run test:migrate && npx dotenv-cli -e .env.test -- npm run test:run && npx dotenv-cli -e .env.test -- npm run test:dockdown",
     "dev": "npx dotenv-cli -e .env.dev -- vite",
