@@ -1,6 +1,7 @@
 import { prisma } from "./prisma/prismaclient";
 import { beforeEach, describe, expect, it } from 'vitest'
 import seedDatabase from "./seed";
+import { MovieService } from "./MovieService";
 
 beforeEach(async () => {
     await seedDatabase();
@@ -49,6 +50,19 @@ describe('database tests', () => {
             ]
         )
     })
+
+    it('should get a movie', async () => {
+        const movie = await MovieService().getMovie(1)
+        expect(movie).toEqual({
+            "id": 1,
+            "releaseYear": 2009,
+            "summary": "Bee fucks woman, or tries to",
+            "title": "Bee Movie",
+        })
+
+    })
+
+
 
 
 
