@@ -27,6 +27,29 @@ describe('database tests', () => {
         expect(user).toEqual({ id: 1, name: "Ya boi", movies: [{ userId: 1, movieId: 1 }] })
     })
 
+    it('should get all users', async () => {
+        const allMovies = await prisma.movie.findMany()
+
+        expect(allMovies).toEqual(
+            [
+                {
+                    id: 1,
+                    title: "Bee Movie",
+                    releaseYear: 2009,
+                    summary: "Bee fucks woman, or tries to"
+
+                },
+                {
+                    id: 2,
+                    title: "The Matrix",
+                    releaseYear: 1999,
+                    summary: "Woah. Neo. Sunglasses. Keanu REEVES."
+                }
+
+            ]
+        )
+    })
+
 
 
 })
