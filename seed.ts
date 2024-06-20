@@ -1,6 +1,13 @@
 import { prisma } from "./prisma/prismaclient"
 
 const seedDatabase = async () => {
+    await prisma.user.deleteMany({
+        where: {},
+    });
+    await prisma.movie.deleteMany({
+        where: {},
+    });
+
     const users = await prisma.user.createMany({
         data: [
             {
