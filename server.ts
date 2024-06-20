@@ -56,18 +56,13 @@ app.get('/users/:id', async (req, res) => {
 
 
 
-app.post('/users/:id/add'), async (req, res) => {
-    const userId = req.params.id
-    const movieId = req.body.movieId
-
-    console.log(console.error())
-    console.log(req)
+app.post('/users/:id/add', async (req, res) => {
+    const userId = parseInt(req.params.id)
+    const movieId = parseInt(req.body.movieId)
+    res.send("movie added: " + JSON.stringify(await MovieService().favoriteMovie(userId, movieId)))
 
 
-    await MovieService().favoriteMovie(userId, movieId)
-
-
-}
+})
 
 
 

@@ -13,10 +13,10 @@ await prisma.user.create({
 })
 
 const movieObject: Movie = {
-    id: 1,
-    title: 'Apocalypse Now',
-    releaseYear: 1955,
-    summary: 'People in the jungle',
+    id: 2,
+    title: 'Gooby',
+    releaseYear: 2024,
+    summary: 'People in the gooby world',
 
 }
 await prisma.movie.create({

@@ -30,7 +30,7 @@ export const MovieService = () => {
             return movie
 
         },
-        favoriteMovie: async (movieId: number, userId: number) => {
+        favoriteMovie: async (userId: number, movieId: number) => {
             // const user = await prisma.movie.findFirst({ where: { id: userId } })
             const newFavoriteMovie = await prisma.moviesOnUsers.create({
                 data: {
@@ -38,6 +38,7 @@ export const MovieService = () => {
                     movieId: movieId
                 }
             })
+            return newFavoriteMovie
         },
         getFavorites: async (userId) => {
             const user = await prisma.user.findFirst({
