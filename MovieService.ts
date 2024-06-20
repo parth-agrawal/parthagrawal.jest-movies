@@ -5,6 +5,16 @@ import { prisma } from "./prisma/prismaclient"
 
 export const MovieService = () => {
     return {
+        getUser: async (userId: number) => {
+            const user = await prisma.user.findFirst({
+                where: { id: userId },
+                include: { movies: true }
+            })
+            return user
+
+
+        },
+
         getAllMovies: async () => {
             const allMovies = await prisma.movie.findMany()
             console.log(allMovies)

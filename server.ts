@@ -28,11 +28,44 @@ app.get('/movies/:id', async (req, res) => {
     res.send(await MovieService().getMovie(parseInt(id)))
 })
 
+app.get('/users/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    const user = await MovieService().getUser(id)
+    if (user) {
+        res.send("User: " + JSON.stringify(user))
+    }
+    else {
+        res.send("Error: User not found")
+    }
+
+})
+
+// app.get('/users/:id/favorites', async (req, res) => {
+//     const id = parseInt(req.params.id)
+
+//     const user = await MovieService().getUser(id)
+//     if (user) {
+//         res.send("User: " + JSON.stringify(user))
+//     }
+//     else {
+//         res.send("Error: User not found")
+//     }
+
+// })
+
+
+
 app.post('/users/:id/add'), async (req, res) => {
     const userId = req.params.id
     const movieId = req.body.movieId
 
+    console.log(console.error())
+    console.log(req)
+
+
     await MovieService().favoriteMovie(userId, movieId)
+
 
 }
 
