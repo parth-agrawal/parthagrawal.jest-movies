@@ -1,1 +1,1 @@
-Learning to use the testing framework Jest
+Learning to use the Jest testing framework
