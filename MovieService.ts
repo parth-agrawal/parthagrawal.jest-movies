@@ -5,6 +5,16 @@ import { prisma } from "./prisma/prismaclient"
 
 export const MovieService = () => {
     return {
+        getUser: async (userId: number) => {
+            const user = await prisma.user.findFirst({
+                where: { id: userId },
+                include: { movies: true }
+            })
+            return user
+
+
+        },
+
         getAllMovies: async () => {
             const allMovies = await prisma.movie.findMany()
             console.log(allMovies)
@@ -20,7 +30,7 @@ export const MovieService = () => {
             return movie
 
         },
-        favoriteMovie: async (movieId: number, userId: number) => {
+        favoriteMovie: async (userId: number, movieId: number) => {
             // const user = await prisma.movie.findFirst({ where: { id: userId } })
             const newFavoriteMovie = await prisma.moviesOnUsers.create({
                 data: {
@@ -28,16 +38,7 @@ export const MovieService = () => {
                     movieId: movieId
                 }
             })
-        },
-        getFavorites: async (userId) => {
-            const user = await prisma.user.findFirst({
-                where: {
-                    id: userId
-                }
-            })
-
-            return
-
+            return newFavoriteMovie
         }
 
 
