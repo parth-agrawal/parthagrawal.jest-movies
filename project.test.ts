@@ -15,4 +15,14 @@ describe('database tests', () => {
         expect(user).toStrictEqual({ id: 42, name: "Man" })
     })
 
+    it('should get a user', async (userId: number) => {
+        const user = await prisma.user.findFirst({
+            where: { id: userId },
+            include: { movies: true }
+
+        })
+    })
+
+
+
 })
