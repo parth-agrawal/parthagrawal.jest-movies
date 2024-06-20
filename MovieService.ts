@@ -39,16 +39,6 @@ export const MovieService = () => {
                 }
             })
             return newFavoriteMovie
-        },
-        getFavorites: async (userId) => {
-            const user = await prisma.user.findFirst({
-                where: {
-                    id: userId
-                }
-            })
-
-            return
-
         }
 
 
