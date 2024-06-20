@@ -2,6 +2,8 @@ import { prisma } from "./prisma/prismaclient";
 import { beforeEach, describe, expect, it } from 'vitest'
 import seedDatabase from "./seed";
 import { MovieService } from "./MovieService";
+import request from 'supertest';
+import { app } from "./server";
 
 beforeEach(async () => {
     await seedDatabase();
@@ -80,5 +82,45 @@ describe('database tests', () => {
 
 
 
+
+})
+
+describe('server tests', () => {
+    it('should say hello world', async () => {
+        const res = await request(app).get('/')
+        console.log(res)
+        expect(res.text).toEqual('hello world')
+    })
+
+    it('should get all movies', async () => {
+        const res = await request(app).get('/movies/all')
+        expect(res.body).toEqual([
+            { "id": 1, "title": "Bee Movie", "releaseYear": 2009, "summary": "Bee fucks woman, or tries to" },
+            { "id": 2, "title": "The Matrix", "releaseYear": 1999, "summary": "Woah. Neo. Sunglasses. Keanu REEVES." }
+        ])
+    })
+
+    it('should get a specific movie', async () => {
+        const testId = 1
+        const res = await request(app).get('/movies/' + testId)
+
+        expect(res.body).toEqual({ "id": 1, "title": "Bee Movie", "releaseYear": 2009, "summary": "Bee fucks woman, or tries to" })
+
+    })
+
+    it('should get a specific user', async () => {
+        const userId = 1
+        const res = await request(app).get('/users/' + userId)
+        expect(res.body).toEqual({
+            "id": 1,
+            "movies": [
+                {
+                    "movieId": 1,
+                    "userId": 1,
+                },
+            ],
+            "name": "Ya boi",
+        })
+    })
 
 })

@@ -2,11 +2,11 @@ import express from 'express';
 import { MovieService } from './MovieService';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import request from 'supertest'
 
 
 
-
-const app = express();
+export const app = express();
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
@@ -33,13 +33,14 @@ app.get('/users/:id', async (req, res) => {
 
     const user = await MovieService().getUser(id)
     if (user) {
-        res.send("User: " + JSON.stringify(user))
+        res.send(user)
     }
     else {
         res.send("Error: User not found")
     }
 
 })
+
 
 // app.get('/users/:id/favorites', async (req, res) => {
 //     const id = parseInt(req.params.id)
@@ -53,6 +54,7 @@ app.get('/users/:id', async (req, res) => {
 //     }
 
 // })
+
 
 
 
