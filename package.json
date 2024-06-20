@@ -4,7 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "loadenv": "npx dotenv-cli -e .env.test",
+    "test:dockup": "docker compose -f docker-compose.test.yml up -d",
+    "test:migrate": "npx prisma migrate dev",
+    "test:run": "bun vitest",
+    "test:dockdown": "docker compose -f docker-compose.test.yml down",
+    "test": "npx dotenv-cli -e .env.test -- npm run test:dockup && npx dotenv-cli -e .env.test -- npm run test:migrate && npx dotenv-cli -e .env.test -- npm run test:run && npx dotenv-cli -e .env.test -- npm run test:dockdown",
+    "dev": "npx dotenv-cli -e .env.dev -- vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -17,7 +23,8 @@
     "express": "^4.19.2",
     "prisma": "^5.15.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "supertest": "^7.0.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
@@ -33,6 +40,7 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vitest": "^1.6.0"
   }
 }
