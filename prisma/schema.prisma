@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "postgresql" // get provider from ENV file
   url      = env("DIRECT_URL")
 }
 
@@ -28,9 +28,9 @@ model Movie {
 }
 
 model MoviesOnUsers {
-  movie   Movie @relation(fields: [movieId], references: [id])
+  movie   Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
   movieId Int
-  user    User  @relation(fields: [userId], references: [id])
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  Int
 
   @@id([movieId, userId])
